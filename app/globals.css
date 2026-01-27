@@ -123,3 +123,69 @@
     @apply bg-background text-foreground;
   }
 }
+/* src/app/globals.css */
+
+/* Tailwind base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base adjustments */
+:root {
+  --scrollbar-thumb: rgba(100, 116, 139, 0.24); /* slate-500 24% */
+  --scrollbar-thumb-hover: rgba(100, 116, 139, 0.36);
+}
+
+/* Smooth fonts */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle background override if needed (optional)
+body {
+  background-color: #f8fafc; // slate-50
+}
+*/
+
+/* ===== Subtle / hidden-looking scrollbar (cross-browser) ===== */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+/* WebKit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 9999px;
+  border: 2px solid transparent; /* space around thumb for neat look */
+  background-clip: padding-box;
+}
+
+/* Hover state */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+/* Optional: hide scrollbar on small screens (touch-first) */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Tiny utility for very subtle box shadows used across UI if not set in Tailwind config */
+.subtle-card {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.02);
+}

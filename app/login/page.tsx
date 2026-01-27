@@ -8,30 +8,35 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  async function handleSubmit(formData: FormData) {
-    setIsLoading(true);
+  // Logic UX Loading yang Benar
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Mencegah reload halaman
+    setIsLoading(true);     // Mulai Loading
     setErrorMessage("");
+
+    const formData = new FormData(event.currentTarget);
+
     try {
       await login(formData);
+      // PENTING: Jangan matikan loading jika sukses. 
+      // Biarkan loading berputar sampai halaman dashboard muncul.
     } catch (error: any) {
-      // INI PERBAIKANNYA:
-      // Jika errornya berisi pesan "NEXT_REDIRECT", itu artinya BERHASIL LOGIN (sedang dialihkan).
-      // Jangan tampilkan sebagai error.
-      if (error.message.includes("NEXT_REDIRECT")) {
+      // Jika errornya karena redirect (berhasil), abaikan errornya
+      if (error.message && error.message.includes("NEXT_REDIRECT")) {
         return; 
       }
       
-      console.error(error);
-      setErrorMessage(error.message);
+      // Jika error beneran (password salah), matikan loading
+      setErrorMessage("Username atau Password salah.");
       setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100 p-4 font-sans">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm border border-slate-200">
         
-        {/* Header */}
+        {/* Header Tetap Sama */}
         <div className="text-center mb-8">
           <div className="bg-indigo-600 w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-200">
             <Lock className="text-white" size={28} />
@@ -47,18 +52,19 @@ export default function LoginPage() {
           </div>
         )}
 
-        {/* Form */}
-        <form action={handleSubmit} className="space-y-5">
+        {/* Form dengan onSubmit Handler */}
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Username</label>
             <div className="relative group">
               <User className="absolute left-3 top-3 text-slate-400 group-focus-within:text-indigo-600 transition-colors" size={18} />
               <input 
-                name="username" // Name diganti jadi username
+                name="username" 
                 type="text" 
                 required 
                 autoComplete="off"
-                className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg text-slate-800 font-medium focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all" 
+                disabled={isLoading}
+                className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg text-slate-800 font-medium focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all disabled:opacity-50" 
                 placeholder="Contoh: siswa01" 
               />
             </div>
@@ -72,7 +78,8 @@ export default function LoginPage() {
                 name="password" 
                 type="password" 
                 required 
-                className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg text-slate-800 font-medium focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all" 
+                disabled={isLoading}
+                className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg text-slate-800 font-medium focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all disabled:opacity-50" 
                 placeholder="••••••••" 
               />
             </div>

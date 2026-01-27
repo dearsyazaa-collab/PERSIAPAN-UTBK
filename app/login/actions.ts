@@ -1,33 +1,50 @@
-'use server'
+"use server";
 
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
-import { createClient } from '@/utils/supabase/server'
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
+
+// Domain dummy untuk menyamarkan username jadi email
+const DUMMY_DOMAIN = "@sekolah.id";
 
 export async function login(formData: FormData) {
-  const supabase = await createClient()
+  const supabase = await createClient();
 
-  // 1. Ambil Username
-  const username = formData.get('username') as string
-  const password = formData.get('password') as string
+  // 1. Ambil input sebagai "username"
+  const rawUsername = formData.get("username") as string;
+  const password = formData.get("password") as string;
 
-  // 2. Trik: Gabungkan dengan domain fiktif
-  // Jadi kalau user ketik "budi", sistem baca "budi@utbk.com"
-  const fakeEmail = `${username}@utbk.com`
+  // 2. Ubah jadi format email untuk Supabase (misal: admin -> admin@sekolah.id)
+  // Kecuali jika user mengetik email lengkap, kita biarkan.
+  const email = rawUsername.includes("@") 
+    ? rawUsername 
+    : `${rawUsername}${DUMMY_DOMAIN}`;
 
   // 3. Login ke Supabase
-  const { error } = await supabase.auth.signInWithPassword({
-    email: fakeEmail,
+  const { data: authData, error } = await supabase.auth.signInWithPassword({
+    email,
     password,
-  })
+  });
 
   if (error) {
-    // Pesan error lebih ramah
-    return redirect('/login?message=Username atau Password Salah')
+    throw new Error("Login gagal. Periksa Username & Password.");
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/')
-}
+  // 4. Cek Role (Admin/Siswa)
+  const { data: userData } = await supabase
+    .from('users')
+    .select('role')
+    .eq('id', authData.user.id)
+    .single();
 
-// Function Signup SUDAH DIHAPUS karena user tidak boleh daftar sendiri.
+  const role = userData?.role || 'siswa';
+
+  revalidatePath("/", "layout");
+  
+  // 5. Redirect sesuai Role
+  if (role === 'admin') {
+    redirect("/admin");
+  } else {
+    redirect("/dashboard");
+  }
+}

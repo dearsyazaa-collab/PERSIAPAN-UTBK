@@ -1,74 +1,103 @@
-import { login } from './actions' // Hapus import signup karena tidak dipakai lagi
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+"use client";
 
-type Props = {
-  searchParams: Promise<{ message?: string }>
-}
+import { useState } from "react";
+import { login } from "./actions";
+import { Loader2, Lock, User, KeyRound } from "lucide-react";
 
-export default async function LoginPage(props: Props) {
-  const searchParams = await props.searchParams
-  const message = searchParams.message
+export default function LoginPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function handleSubmit(formData: FormData) {
+    setIsLoading(true);
+    setErrorMessage("");
+    try {
+      await login(formData);
+    } catch (error: any) {
+      // INI PERBAIKANNYA:
+      // Jika errornya berisi pesan "NEXT_REDIRECT", itu artinya BERHASIL LOGIN (sedang dialihkan).
+      // Jangan tampilkan sebagai error.
+      if (error.message.includes("NEXT_REDIRECT")) {
+        return; 
+      }
+      
+      console.error(error);
+      setErrorMessage(error.message);
+      setIsLoading(false);
+    }
+  }
 
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-slate-50 px-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-2xl text-center">Login Peserta</CardTitle>
-          <CardDescription className="text-center">
-            Masukkan Username dan Password dari Admin.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form className="grid gap-4">
-            
-            {/* INPUT USERNAME */}
-            <div className="grid gap-2">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                id="username"
+    <div className="min-h-screen flex items-center justify-center bg-slate-100 p-4 font-sans">
+      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm border border-slate-200">
+        
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="bg-indigo-600 w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-200">
+            <Lock className="text-white" size={28} />
+          </div>
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Portal Ujian</h1>
+          <p className="text-slate-500 text-sm mt-1">Masuk menggunakan akun siswa/admin</p>
+        </div>
+
+        {/* Error Alert */}
+        {errorMessage && (
+          <div className="mb-6 p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-200 flex items-center gap-2 animate-pulse">
+             ⚠️ {errorMessage}
+          </div>
+        )}
+
+        {/* Form */}
+        <form action={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Username</label>
+            <div className="relative group">
+              <User className="absolute left-3 top-3 text-slate-400 group-focus-within:text-indigo-600 transition-colors" size={18} />
+              <input 
                 name="username" // Name diganti jadi username
-                type="text"     // Type diganti jadi text biasa
-                placeholder="Contoh: peserta001"
-                required
+                type="text" 
+                required 
+                autoComplete="off"
+                className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg text-slate-800 font-medium focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all" 
+                placeholder="Contoh: siswa01" 
               />
             </div>
+          </div>
+          
+          <div>
+            <label className="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Password</label>
+            <div className="relative group">
+              <KeyRound className="absolute left-3 top-3 text-slate-400 group-focus-within:text-indigo-600 transition-colors" size={18} />
+              <input 
+                name="password" 
+                type="password" 
+                required 
+                className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg text-slate-800 font-medium focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all" 
+                placeholder="••••••••" 
+              />
+            </div>
+          </div>
 
-            {/* INPUT PASSWORD */}
-            <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                required
-              />
-            </div>
-            
-            {/* ERROR MESSAGE */}
-            {message && (
-              <div className="text-sm font-medium text-red-500 bg-red-50 p-2 rounded border border-red-200 text-center">
-                {message}
-              </div>
+          <button 
+            type="submit" 
+            disabled={isLoading} 
+            className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 mt-6 shadow-md active:scale-[0.98] active:bg-black disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="animate-spin" size={20} />
+                <span>Memproses...</span>
+              </>
+            ) : (
+              "Mulai System"
             )}
+          </button>
+        </form>
 
-            <div className="flex flex-col gap-2 mt-2">
-              {/* HANYA ADA TOMBOL LOGIN */}
-              <Button formAction={login} className="w-full bg-blue-600 hover:bg-blue-700">
-                Masuk Aplikasi
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+        <div className="mt-8 text-center">
+             <p className="text-xs text-slate-400">Hubungi Admin jika lupa password</p>
+        </div>
+      </div>
     </div>
-  )
+  );
 }

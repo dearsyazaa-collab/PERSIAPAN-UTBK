@@ -1,0 +1,1286 @@
+{
+  "version": "utbk-packquestion-v1",
+  "source_note": "Soal latihan original untuk persiapan UTBK (bukan soal resmi).",
+  "packs": [
+    {
+      "pack_id": "PU-PACK-01",
+      "subtest": "Penalaran Umum (PU)",
+      "title": "PU Pack 01 - Logika, Analogi, Pola",
+      "time_limit_minutes": 25,
+      "questions": [
+        {
+          "qid": "PU-01-001",
+          "type": "multiple_choice",
+          "stem": "Semua peneliti teliti. Sebagian peneliti adalah dosen. Kesimpulan yang paling tepat adalah ...",
+          "choices": {
+            "A": "Semua dosen teliti",
+            "B": "Sebagian dosen teliti",
+            "C": "Semua yang teliti adalah dosen",
+            "D": "Sebagian peneliti tidak teliti",
+            "E": "Tidak ada dosen yang teliti"
+          },
+          "answer": "B",
+          "explanation": "Jika sebagian peneliti adalah dosen, maka sebagian dosen termasuk peneliti. Karena semua peneliti teliti, sebagian dosen itu teliti.",
+          "tags": [
+            "silogisme",
+            "logika"
+          ]
+        },
+        {
+          "qid": "PU-01-002",
+          "type": "multiple_choice",
+          "stem": "Jika pernyataan 'Jika hujan maka jalan basah' benar. Jalan tidak basah. Kesimpulan yang sah adalah ...",
+          "choices": {
+            "A": "Hujan",
+            "B": "Tidak hujan",
+            "C": "Jalan pasti kering",
+            "D": "Jika jalan basah maka hujan",
+            "E": "Tidak dapat disimpulkan"
+          },
+          "answer": "B",
+          "explanation": "Modus tollens: Jika P maka Q. Tidak Q, maka tidak P.",
+          "tags": [
+            "implikasi",
+            "modus_tollens"
+          ]
+        },
+        {
+          "qid": "PU-01-003",
+          "type": "multiple_choice",
+          "stem": "Analogi: KUNCI : PINTU = PASSWORD : ...",
+          "choices": {
+            "A": "Internet",
+            "B": "Akun",
+            "C": "Komputer",
+            "D": "Layar",
+            "E": "Kabel"
+          },
+          "answer": "B",
+          "explanation": "Kunci membuka pintu; password membuka/masuk ke akun.",
+          "tags": [
+            "analogi"
+          ]
+        },
+        {
+          "qid": "PU-01-004",
+          "type": "multiple_choice",
+          "stem": "Urutan bilangan: 3, 6, 12, 24, ... angka berikutnya adalah ...",
+          "choices": {
+            "A": "27",
+            "B": "30",
+            "C": "36",
+            "D": "48",
+            "E": "60"
+          },
+          "answer": "D",
+          "explanation": "Pola dikali 2 setiap langkah.",
+          "tags": [
+            "pola_bilangan"
+          ]
+        },
+        {
+          "qid": "PU-01-005",
+          "type": "multiple_choice",
+          "stem": "Diketahui: Semua A adalah B. Tidak ada B yang C. Maka ...",
+          "choices": {
+            "A": "Semua C adalah A",
+            "B": "Sebagian A adalah C",
+            "C": "Tidak ada A yang C",
+            "D": "Semua B adalah A",
+            "E": "Sebagian C adalah B"
+          },
+          "answer": "C",
+          "explanation": "Jika A ⊆ B dan B ∩ C = ∅, maka A ∩ C = ∅.",
+          "tags": [
+            "himpunan",
+            "logika"
+          ]
+        },
+        {
+          "qid": "PU-01-006",
+          "type": "multiple_choice",
+          "stem": "Pernyataan mana yang ekuivalen dengan 'Tidak benar bahwa semua siswa terlambat'?",
+          "choices": {
+            "A": "Semua siswa tepat waktu",
+            "B": "Ada siswa yang tidak terlambat",
+            "C": "Tidak ada siswa yang terlambat",
+            "D": "Ada siswa yang terlambat",
+            "E": "Semua siswa terlambat"
+          },
+          "answer": "B",
+          "explanation": "Negasi 'semua' menjadi 'ada ... yang tidak'.",
+          "tags": [
+            "negasi",
+            "kuantor"
+          ]
+        },
+        {
+          "qid": "PU-01-007",
+          "type": "multiple_choice",
+          "stem": "Sebuah toko memberi diskon 20% lalu tambahan diskon 10% dari harga setelah diskon pertama. Total diskon setara dengan ...",
+          "choices": {
+            "A": "28%",
+            "B": "30%",
+            "C": "32%",
+            "D": "20%",
+            "E": "10%"
+          },
+          "answer": "A",
+          "explanation": "Harga akhir = 0,8 × 0,9 = 0,72. Diskon = 1 − 0,72 = 0,28 = 28%.",
+          "tags": [
+            "penalaran_kuantitatif",
+            "persentase"
+          ]
+        },
+        {
+          "qid": "PU-01-008",
+          "type": "multiple_choice",
+          "stem": "Jika 5 pekerja menyelesaikan pekerjaan dalam 12 hari, maka 8 pekerja (dengan kecepatan sama) menyelesaikan pekerjaan dalam ...",
+          "choices": {
+            "A": "6",
+            "B": "7,5",
+            "C": "8",
+            "D": "9",
+            "E": "10"
+          },
+          "answer": "B",
+          "explanation": "Pekerjaan = 5×12 = 60 pekerja-hari. Waktu = 60/8 = 7,5 hari.",
+          "tags": [
+            "perbandingan",
+            "kerja_waktu"
+          ]
+        },
+        {
+          "qid": "PU-01-009",
+          "type": "multiple_choice",
+          "stem": "Pola huruf: A, C, F, J, O, ... huruf berikutnya adalah ...",
+          "choices": {
+            "A": "P",
+            "B": "R",
+            "C": "U",
+            "D": "V",
+            "E": "W"
+          },
+          "answer": "C",
+          "explanation": "Loncatannya +2, +3, +4, +5, maka berikutnya +6: O(15) + 6 = U(21).",
+          "tags": [
+            "pola",
+            "deret_huruf"
+          ]
+        },
+        {
+          "qid": "PU-01-010",
+          "type": "multiple_choice",
+          "stem": "Data: Kelas A rata-rata 78, Kelas B rata-rata 82. Jika jumlah siswa A = 20 dan B = 30, maka rata-rata gabungan adalah ...",
+          "choices": {
+            "A": "79,6",
+            "B": "80,0",
+            "C": "80,4",
+            "D": "81,0",
+            "E": "82,0"
+          },
+          "answer": "C",
+          "explanation": "Rata-rata gabungan = (20×78 + 30×82) / 50 = (1560 + 2460)/50 = 4020/50 = 80,4.",
+          "tags": [
+            "statistika_dasar",
+            "rata_rata"
+          ]
+        }
+      ]
+    },
+    {
+      "pack_id": "PBM-PACK-01",
+      "subtest": "Pemahaman Bacaan & Menulis (PBM)",
+      "title": "PBM Pack 01 - Ide Pokok, Simpulan, Kalimat Efektif",
+      "time_limit_minutes": 25,
+      "questions": [
+        {
+          "qid": "PBM-01-001",
+          "type": "multiple_choice",
+          "stem": "Bacalah paragraf berikut: \"Kebiasaan membaca sejak dini memperluas kosakata dan melatih daya pikir. Anak yang terbiasa membaca cenderung lebih mudah memahami pelajaran.\" Gagasan utama paragraf tersebut adalah ...",
+          "choices": {
+            "A": "Kosakata anak bertambah karena membaca",
+            "B": "Membaca sejak dini bermanfaat bagi perkembangan anak",
+            "C": "Pelajaran sekolah sulit dipahami",
+            "D": "Daya pikir anak dipengaruhi lingkungan",
+            "E": "Anak harus membaca setiap hari"
+          },
+          "answer": "B",
+          "explanation": "Kalimat pertama merangkum inti: manfaat membaca sejak dini, lalu dijelaskan dampaknya.",
+          "tags": [
+            "ide_pokok"
+          ]
+        },
+        {
+          "qid": "PBM-01-002",
+          "type": "multiple_choice",
+          "stem": "Kalimat yang paling efektif adalah ...",
+          "choices": {
+            "A": "Para siswa-siswa diminta untuk segera mengumpulkan tugasnya mereka.",
+            "B": "Para siswa diminta segera mengumpulkan tugas mereka.",
+            "C": "Para siswa diminta untuk segera mengumpulkan tugas mereka masing-masing.",
+            "D": "Siswa-siswa diminta untuk segera mengumpulkan tugas-tugasnya.",
+            "E": "Para siswa itu diminta agar segera untuk mengumpulkan tugas."
+          },
+          "answer": "B",
+          "explanation": "Menghindari pengulangan (siswa-siswa), kata mubazir (untuk/agar), dan struktur lebih ringkas.",
+          "tags": [
+            "kalimat_efektif"
+          ]
+        },
+        {
+          "qid": "PBM-01-003",
+          "type": "multiple_choice",
+          "stem": "Simpulan yang tepat dari paragraf: \"Kemacetan meningkatkan polusi dan menurunkan produktivitas. Karena itu, transportasi publik perlu diperbaiki dan penggunaan kendaraan pribadi dikurangi.\" adalah ...",
+          "choices": {
+            "A": "Polusi hanya disebabkan pabrik",
+            "B": "Kemacetan tidak memengaruhi produktivitas",
+            "C": "Perbaikan transportasi publik dan pengurangan kendaraan pribadi penting untuk mengatasi dampak kemacetan",
+            "D": "Transportasi publik selalu nyaman",
+            "E": "Kendaraan pribadi harus dilarang total"
+          },
+          "answer": "C",
+          "explanation": "Simpulan menggabungkan sebab (dampak kemacetan) dan solusi yang dinyatakan.",
+          "tags": [
+            "simpulan"
+          ]
+        },
+        {
+          "qid": "PBM-01-004",
+          "type": "multiple_choice",
+          "stem": "Makna kata \"krusial\" pada kalimat: \"Data krusial harus diverifikasi sebelum dipublikasikan.\" adalah ...",
+          "choices": {
+            "A": "Sepele",
+            "B": "Rahasia",
+            "C": "Penting",
+            "D": "Sementara",
+            "E": "Rumit"
+          },
+          "answer": "C",
+          "explanation": "Krusial = sangat penting/menentukan.",
+          "tags": [
+            "makna_kata"
+          ]
+        },
+        {
+          "qid": "PBM-01-005",
+          "type": "multiple_choice",
+          "stem": "Kalimat yang berstruktur paralel adalah ...",
+          "choices": {
+            "A": "Ia suka membaca, menulis, dan untuk berdebat.",
+            "B": "Ia suka membaca, menulis, dan berdiskusi.",
+            "C": "Ia suka membaca, penulisan, dan berdiskusi.",
+            "D": "Ia suka membaca, menulis, dan diskusi.",
+            "E": "Ia suka membaca, menulis, dan diskusikan."
+          },
+          "answer": "B",
+          "explanation": "Semua predikat berbentuk verba: membaca-menulis-berdiskusi.",
+          "tags": [
+            "paralelisme"
+          ]
+        },
+        {
+          "qid": "PBM-01-006",
+          "type": "multiple_choice",
+          "stem": "Pernyataan yang merupakan fakta adalah ...",
+          "choices": {
+            "A": "Kota itu sangat indah dan menawan.",
+            "B": "Film itu paling bagus sepanjang masa.",
+            "C": "Suhu air mendidih pada tekanan 1 atm adalah sekitar 100°C.",
+            "D": "Belajar malam hari selalu lebih efektif.",
+            "E": "Semua orang seharusnya suka membaca."
+          },
+          "answer": "C",
+          "explanation": "Fakta dapat diverifikasi; opsi lain berupa opini/penilaian.",
+          "tags": [
+            "fakta_opini"
+          ]
+        },
+        {
+          "qid": "PBM-01-007",
+          "type": "multiple_choice",
+          "stem": "Perbaikan ejaan yang benar: \"Ia di beritahu bahwa rapat akan di laksanakan besok.\" menjadi ...",
+          "choices": {
+            "A": "Ia diberitahu bahwa rapat akan dilaksanakan besok.",
+            "B": "Ia di beritahu bahwa rapat akan dilaksanakan besok.",
+            "C": "Ia diberitahu bahwa rapat akan di laksanakan besok.",
+            "D": "Ia diberi tahu bahwa rapat akan di laksanakan besok.",
+            "E": "Ia diberi-tahu bahwa rapat akan dilaksanakan besok."
+          },
+          "answer": "A",
+          "explanation": "Imbuhan 'di-' digabung: diberitahu, dilaksanakan.",
+          "tags": [
+            "ejaan",
+            "imbuhan"
+          ]
+        },
+        {
+          "qid": "PBM-01-008",
+          "type": "multiple_choice",
+          "stem": "Kalimat yang tidak padu adalah ...",
+          "choices": {
+            "A": "Tanaman membutuhkan air untuk fotosintesis.",
+            "B": "Air membantu transportasi zat hara dalam tubuh tanaman.",
+            "C": "Banyak orang menyukai olahraga sepak bola.",
+            "D": "Kekurangan air dapat menghambat pertumbuhan tanaman.",
+            "E": "Air juga menjaga turgor sel agar daun tidak layu."
+          },
+          "answer": "C",
+          "explanation": "Kalimat C tidak terkait topik tanaman dan air.",
+          "tags": [
+            "kepaduan_paragraf"
+          ]
+        },
+        {
+          "qid": "PBM-01-009",
+          "type": "multiple_choice",
+          "stem": "Kalimat yang tepat untuk melengkapi paragraf: \"Olahraga teratur meningkatkan kebugaran. Selain itu, olahraga membantu mengurangi stres. _____.\"",
+          "choices": {
+            "A": "Karena itu, stres selalu buruk.",
+            "B": "Dengan demikian, olahraga memberikan manfaat fisik dan mental.",
+            "C": "Namun, kebugaran tidak penting.",
+            "D": "Sebaliknya, stres membuat olahraga tidak berguna.",
+            "E": "Maka dari itu, semua orang harus menjadi atlet."
+          },
+          "answer": "B",
+          "explanation": "Kalimat penutup yang merangkum dua manfaat (fisik dan mental).",
+          "tags": [
+            "kalimat_penutup",
+            "kohesi"
+          ]
+        },
+        {
+          "qid": "PBM-01-010",
+          "type": "multiple_choice",
+          "stem": "Kalimat yang mengandung hubungan sebab-akibat adalah ...",
+          "choices": {
+            "A": "Ia membaca buku dan menulis ringkasan.",
+            "B": "Karena listrik padam, kegiatan belajar terganggu.",
+            "C": "Ia membeli buku, lalu pulang.",
+            "D": "Ia belajar sambil mendengarkan musik.",
+            "E": "Ia belajar, tetapi tetap santai."
+          },
+          "answer": "B",
+          "explanation": "Kata 'karena' menandai sebab-akibat.",
+          "tags": [
+            "konjungsi",
+            "sebab_akibat"
+          ]
+        }
+      ]
+    },
+    {
+      "pack_id": "PPU-PACK-01",
+      "subtest": "Pengetahuan & Pemahaman Umum (PPU)",
+      "title": "PPU Pack 01 - Sinonim, Antonim, Kata Baku, EYD",
+      "time_limit_minutes": 15,
+      "questions": [
+        {
+          "qid": "PPU-01-001",
+          "type": "multiple_choice",
+          "stem": "Sinonim kata \"akurat\" adalah ...",
+          "choices": {
+            "A": "Tepat",
+            "B": "Kabur",
+            "C": "Lengah",
+            "D": "Samar",
+            "E": "Ragu"
+          },
+          "answer": "A",
+          "explanation": "Akurat = tepat/terukur benar.",
+          "tags": [
+            "sinonim"
+          ]
+        },
+        {
+          "qid": "PPU-01-002",
+          "type": "multiple_choice",
+          "stem": "Antonim kata \"konkret\" adalah ...",
+          "choices": {
+            "A": "Nyata",
+            "B": "Abstrak",
+            "C": "Padat",
+            "D": "Kasar",
+            "E": "Terbuka"
+          },
+          "answer": "B",
+          "explanation": "Konkret berlawanan dengan abstrak.",
+          "tags": [
+            "antonim"
+          ]
+        },
+        {
+          "qid": "PPU-01-003",
+          "type": "multiple_choice",
+          "stem": "Penulisan kata baku yang benar adalah ...",
+          "choices": {
+            "A": "Nasehat",
+            "B": "Resiko",
+            "C": "Praktek",
+            "D": "Risiko",
+            "E": "Ijasah"
+          },
+          "answer": "D",
+          "explanation": "Baku: risiko, nasihat, praktik, ijazah.",
+          "tags": [
+            "kata_baku"
+          ]
+        },
+        {
+          "qid": "PPU-01-004",
+          "type": "multiple_choice",
+          "stem": "Kalimat dengan tanda baca yang tepat adalah ...",
+          "choices": {
+            "A": "Saya membeli: roti, susu dan telur.",
+            "B": "Saya membeli roti, susu, dan telur.",
+            "C": "Saya membeli roti susu dan telur.",
+            "D": "Saya membeli roti; susu, dan telur.",
+            "E": "Saya membeli roti, susu dan, telur."
+          },
+          "answer": "B",
+          "explanation": "Daftar tiga unsur memakai koma dan sebelum 'dan' memakai koma sesuai kaidah penulisan daftar.",
+          "tags": [
+            "tanda_baca",
+            "koma"
+          ]
+        },
+        {
+          "qid": "PPU-01-005",
+          "type": "multiple_choice",
+          "stem": "Makna istilah \"mitigasi\" dalam konteks bencana adalah ...",
+          "choices": {
+            "A": "Pemulihan setelah bencana",
+            "B": "Upaya mengurangi risiko/dampak bencana",
+            "C": "Pelaporan kejadian bencana",
+            "D": "Pembuatan berita bencana",
+            "E": "Penetapan status bencana"
+          },
+          "answer": "B",
+          "explanation": "Mitigasi = tindakan untuk mengurangi risiko/dampak.",
+          "tags": [
+            "istilah"
+          ]
+        },
+        {
+          "qid": "PPU-01-006",
+          "type": "multiple_choice",
+          "stem": "Pasangan kata yang berhubungan hiponim-hipernim adalah ...",
+          "choices": {
+            "A": "Meja - Kursi",
+            "B": "Mawar - Bunga",
+            "C": "Panas - Dingin",
+            "D": "Cepat - Kilat",
+            "E": "Air - Api"
+          },
+          "answer": "B",
+          "explanation": "Mawar adalah jenis dari bunga (hiponim-hipernim).",
+          "tags": [
+            "relasi_makna"
+          ]
+        },
+        {
+          "qid": "PPU-01-007",
+          "type": "multiple_choice",
+          "stem": "Penulisan yang benar untuk gabungan kata \"antar\" adalah ...",
+          "choices": {
+            "A": "antar kota",
+            "B": "antar-kota",
+            "C": "antarkota",
+            "D": "antarKota",
+            "E": "antar.kota"
+          },
+          "answer": "C",
+          "explanation": "Awalan antar- digabung bila membentuk satu kata: antarkota, antarnegara.",
+          "tags": [
+            "ejaan"
+          ]
+        },
+        {
+          "qid": "PPU-01-008",
+          "type": "multiple_choice",
+          "stem": "Kata yang bermakna konotatif pada pilihan berikut adalah ...",
+          "choices": {
+            "A": "Meja",
+            "B": "Kursi",
+            "C": "Tikus berdasi",
+            "D": "Berat 5 kilogram",
+            "E": "Tinggi 170 cm"
+          },
+          "answer": "C",
+          "explanation": "\"Tikus berdasi\" bermakna kias/konotatif (koruptor), bukan tikus sebenarnya.",
+          "tags": [
+            "konotatif",
+            "kiasan"
+          ]
+        },
+        {
+          "qid": "PPU-01-009",
+          "type": "multiple_choice",
+          "stem": "Kata serapan yang penulisannya benar adalah ...",
+          "choices": {
+            "A": "Aktip",
+            "B": "Efektif",
+            "C": "Apotik",
+            "D": "Sistim",
+            "E": "Hektar"
+          },
+          "answer": "B",
+          "explanation": "Baku: efektif, apotek, sistem, aktif.",
+          "tags": [
+            "kata_serapan",
+            "kata_baku"
+          ]
+        },
+        {
+          "qid": "PPU-01-010",
+          "type": "multiple_choice",
+          "stem": "Kalimat yang menggunakan kata \"di\" sebagai preposisi (dipisah) adalah ...",
+          "choices": {
+            "A": "Buku itu disimpan di lemari.",
+            "B": "Pintu itu ditutup.",
+            "C": "Ia dibantu temannya.",
+            "D": "Kue itu dimakan.",
+            "E": "Rapat itu dihadiri semua anggota."
+          },
+          "answer": "A",
+          "explanation": "\"di lemari\" menunjukkan tempat (preposisi) sehingga dipisah.",
+          "tags": [
+            "di_preposisi",
+            "ejaan"
+          ]
+        }
+      ]
+    },
+    {
+      "pack_id": "KMBI-PACK-01",
+      "subtest": "Kemampuan Memahami Bacaan & Menulis Bahasa Inggris (KMBI)",
+      "title": "KMBI Pack 01 - Reading & Grammar",
+      "time_limit_minutes": 15,
+      "questions": [
+        {
+          "qid": "KMBI-01-001",
+          "type": "multiple_choice",
+          "stem": "Choose the best word to complete the sentence: \"She has been studying for hours, ____ she still feels unprepared.\"",
+          "choices": {
+            "A": "so",
+            "B": "because",
+            "C": "but",
+            "D": "and",
+            "E": "if"
+          },
+          "answer": "C",
+          "explanation": "\"but\" shows contrast: studying a lot vs still unprepared.",
+          "tags": [
+            "grammar",
+            "conjunction"
+          ]
+        },
+        {
+          "qid": "KMBI-01-002",
+          "type": "multiple_choice",
+          "stem": "Which sentence is grammatically correct?",
+          "choices": {
+            "A": "He don't like coffee.",
+            "B": "He doesn't likes coffee.",
+            "C": "He doesn't like coffee.",
+            "D": "He don't likes coffee.",
+            "E": "He doesn't liked coffee."
+          },
+          "answer": "C",
+          "explanation": "Third person singular: does not + base verb.",
+          "tags": [
+            "grammar",
+            "subject_verb_agreement"
+          ]
+        },
+        {
+          "qid": "KMBI-01-003",
+          "type": "multiple_choice",
+          "stem": "Reading: \"Many people assume multitasking increases productivity. However, studies suggest switching tasks too often reduces focus and increases errors.\" The main idea is ...",
+          "choices": {
+            "A": "Multitasking is always beneficial",
+            "B": "Switching tasks frequently may harm performance",
+            "C": "People should never do two things at once",
+            "D": "Studies are unreliable",
+            "E": "Productivity depends only on motivation"
+          },
+          "answer": "B",
+          "explanation": "The passage emphasizes negative effects of frequent task switching.",
+          "tags": [
+            "reading",
+            "main_idea"
+          ]
+        },
+        {
+          "qid": "KMBI-01-004",
+          "type": "multiple_choice",
+          "stem": "Choose the correct form: \"If I ____ more time, I would join the club.\"",
+          "choices": {
+            "A": "have",
+            "B": "had",
+            "C": "will have",
+            "D": "has",
+            "E": "having"
+          },
+          "answer": "B",
+          "explanation": "Second conditional: If + past simple, would + verb.",
+          "tags": [
+            "grammar",
+            "conditional"
+          ]
+        },
+        {
+          "qid": "KMBI-01-005",
+          "type": "multiple_choice",
+          "stem": "Vocabulary in context: \"The proposal was rejected because it was not feasible.\" Feasible means ...",
+          "choices": {
+            "A": "expensive",
+            "B": "possible",
+            "C": "dangerous",
+            "D": "confusing",
+            "E": "late"
+          },
+          "answer": "B",
+          "explanation": "Feasible = possible/practical.",
+          "tags": [
+            "vocabulary"
+          ]
+        },
+        {
+          "qid": "KMBI-01-006",
+          "type": "multiple_choice",
+          "stem": "Choose the best sentence: \"Neither the teacher nor the students ____ ready.\"",
+          "choices": {
+            "A": "is",
+            "B": "are",
+            "C": "be",
+            "D": "was",
+            "E": "been"
+          },
+          "answer": "B",
+          "explanation": "Verb agrees with the nearer subject: students (plural) → are.",
+          "tags": [
+            "grammar",
+            "agreement"
+          ]
+        },
+        {
+          "qid": "KMBI-01-007",
+          "type": "multiple_choice",
+          "stem": "Reading inference: \"Tom left the meeting early, glancing at his watch repeatedly.\" We can infer that Tom ...",
+          "choices": {
+            "A": "was bored because the meeting was short",
+            "B": "had another appointment or was in a hurry",
+            "C": "forgot his watch",
+            "D": "was the meeting leader",
+            "E": "enjoyed the discussion"
+          },
+          "answer": "B",
+          "explanation": "Repeatedly checking a watch suggests urgency/time pressure.",
+          "tags": [
+            "reading",
+            "inference"
+          ]
+        },
+        {
+          "qid": "KMBI-01-008",
+          "type": "multiple_choice",
+          "stem": "Choose the correct passive voice: \"They will announce the results tomorrow.\"",
+          "choices": {
+            "A": "The results will be announced tomorrow.",
+            "B": "The results will announced tomorrow.",
+            "C": "The results are announce tomorrow.",
+            "D": "The results will be announce tomorrow.",
+            "E": "The results were announced tomorrow."
+          },
+          "answer": "A",
+          "explanation": "Future passive: will be + past participle.",
+          "tags": [
+            "grammar",
+            "passive"
+          ]
+        },
+        {
+          "qid": "KMBI-01-009",
+          "type": "multiple_choice",
+          "stem": "Choose the correct preposition: \"She is responsible ____ managing the budget.\"",
+          "choices": {
+            "A": "for",
+            "B": "to",
+            "C": "on",
+            "D": "at",
+            "E": "in"
+          },
+          "answer": "A",
+          "explanation": "Responsible for + noun/gerund.",
+          "tags": [
+            "preposition"
+          ]
+        },
+        {
+          "qid": "KMBI-01-010",
+          "type": "multiple_choice",
+          "stem": "Which sentence has the correct word order?",
+          "choices": {
+            "A": "Always I go to school by bus.",
+            "B": "I always go to school by bus.",
+            "C": "I go always to school by bus.",
+            "D": "I go to always school by bus.",
+            "E": "I go to school always by bus."
+          },
+          "answer": "B",
+          "explanation": "Adverb of frequency typically comes before the main verb.",
+          "tags": [
+            "grammar",
+            "word_order"
+          ]
+        }
+      ]
+    },
+    {
+      "pack_id": "LITID-PACK-01",
+      "subtest": "Literasi Bahasa Indonesia",
+      "title": "Literasi Indonesia Pack 01 - Argumentasi & Inferensi",
+      "time_limit_minutes": 30,
+      "questions": [
+        {
+          "qid": "LITID-01-001",
+          "type": "multiple_choice",
+          "stem": "Teks: \"Kebijakan pembatasan kantong plastik sekali pakai dinilai efektif menekan sampah. Namun, keberhasilan kebijakan itu bergantung pada ketersediaan alternatif yang terjangkau.\" Pernyataan yang paling sesuai adalah ...",
+          "choices": {
+            "A": "Kebijakan pasti gagal karena alternatif mahal",
+            "B": "Efektivitas kebijakan tidak terkait alternatif",
+            "C": "Keberhasilan kebijakan dipengaruhi oleh akses alternatif yang terjangkau",
+            "D": "Pembatasan plastik tidak pernah mengurangi sampah",
+            "E": "Alternatif tidak diperlukan"
+          },
+          "answer": "C",
+          "explanation": "Kalimat kedua menyatakan syarat/ketergantungan pada alternatif terjangkau.",
+          "tags": [
+            "pemahaman_teks",
+            "inferensi"
+          ]
+        },
+        {
+          "qid": "LITID-01-002",
+          "type": "multiple_choice",
+          "stem": "Teks: \"Sebagian orang menolak kerja jarak jauh karena dianggap menurunkan disiplin. Padahal, disiplin lebih dipengaruhi sistem evaluasi kinerja daripada lokasi kerja.\" Sikap penulis terhadap kerja jarak jauh adalah ...",
+          "choices": {
+            "A": "Sangat menolak",
+            "B": "Netral tanpa argumen",
+            "C": "Cenderung mendukung dengan menekankan pentingnya evaluasi kinerja",
+            "D": "Menyalahkan semua pekerja",
+            "E": "Mendukung karena kantor tidak penting"
+          },
+          "answer": "C",
+          "explanation": "Penulis membantah alasan penolakan dan mengalihkan fokus pada evaluasi kinerja.",
+          "tags": [
+            "sikap_penulis",
+            "argumen"
+          ]
+        },
+        {
+          "qid": "LITID-01-003",
+          "type": "multiple_choice",
+          "stem": "Teks: \"Literasi digital bukan sekadar kemampuan memakai gawai, melainkan kecakapan menilai kredibilitas informasi.\" Kalimat tersebut menegaskan bahwa ...",
+          "choices": {
+            "A": "Gawai adalah inti literasi digital",
+            "B": "Literasi digital hanya soal media sosial",
+            "C": "Literasi digital menekankan kemampuan evaluasi informasi",
+            "D": "Kredibilitas informasi tidak penting",
+            "E": "Literasi digital sulit dipelajari"
+          },
+          "answer": "C",
+          "explanation": "Terdapat penegasan 'bukan sekadar..., melainkan...' yang mengarah pada evaluasi kredibilitas.",
+          "tags": [
+            "definisi",
+            "penegasan"
+          ]
+        },
+        {
+          "qid": "LITID-01-004",
+          "type": "multiple_choice",
+          "stem": "Teks: \"Kota yang ramah pejalan kaki mendorong aktivitas fisik dan mengurangi emisi. Tetapi, pembangunan trotoar sering dipandang sekadar proyek estetika.\" Masalah yang disorot penulis adalah ...",
+          "choices": {
+            "A": "Trotoar hanya untuk keindahan",
+            "B": "Salah kaprah memandang trotoar sehingga manfaatnya diabaikan",
+            "C": "Emisi tidak bisa dikurangi",
+            "D": "Aktivitas fisik tidak penting",
+            "E": "Trotoar selalu mahal"
+          },
+          "answer": "B",
+          "explanation": "Penulis menyorot persepsi keliru yang mereduksi fungsi trotoar.",
+          "tags": [
+            "isu",
+            "gagasan"
+          ]
+        },
+        {
+          "qid": "LITID-01-005",
+          "type": "multiple_choice",
+          "stem": "Teks: \"Ketika banjir datang, bantuan darurat mengalir. Sayangnya, perhatian terhadap perbaikan drainase mereda setelah air surut.\" Kritik utama penulis adalah ...",
+          "choices": {
+            "A": "Bantuan darurat tidak diperlukan",
+            "B": "Drainase selalu baik",
+            "C": "Penanganan jangka panjang kurang konsisten dibanding respons darurat",
+            "D": "Banjir tidak berbahaya",
+            "E": "Air surut berarti masalah selesai"
+          },
+          "answer": "C",
+          "explanation": "Kontras antara derasnya bantuan darurat vs meredanya perhatian pada solusi permanen.",
+          "tags": [
+            "kritik",
+            "koherensi"
+          ]
+        },
+        {
+          "qid": "LITID-01-006",
+          "type": "multiple_choice",
+          "stem": "Teks: \"Program beasiswa meningkatkan akses pendidikan, tetapi harus disertai pendampingan agar penerima mampu bertahan dan berprestasi.\" Implikasi dari pernyataan itu adalah ...",
+          "choices": {
+            "A": "Beasiswa cukup tanpa strategi lain",
+            "B": "Pendampingan dapat memperkuat dampak beasiswa",
+            "C": "Pendampingan membuat beasiswa tidak perlu",
+            "D": "Akses pendidikan tidak bisa ditingkatkan",
+            "E": "Prestasi tidak dapat dipengaruhi"
+          },
+          "answer": "B",
+          "explanation": "Penulis menyatakan syarat penguat: beasiswa + pendampingan.",
+          "tags": [
+            "implikasi",
+            "kebijakan"
+          ]
+        },
+        {
+          "qid": "LITID-01-007",
+          "type": "multiple_choice",
+          "stem": "Teks: \"Konsumsi berita cepat sering mengorbankan ketelitian. Dalam jangka panjang, hal ini menurunkan kualitas diskusi publik.\" Hubungan antarkalimat adalah ...",
+          "choices": {
+            "A": "Perbandingan",
+            "B": "Sebab-akibat",
+            "C": "Penambahan tanpa hubungan",
+            "D": "Pertentangan",
+            "E": "Kesimpulan yang tidak terkait"
+          },
+          "answer": "B",
+          "explanation": "Ketelitian dikorbankan (sebab) → kualitas diskusi publik menurun (akibat).",
+          "tags": [
+            "relasi_logis"
+          ]
+        },
+        {
+          "qid": "LITID-01-008",
+          "type": "multiple_choice",
+          "stem": "Pernyataan yang merupakan asumsi dari kalimat: \"Jika perpustakaan sekolah nyaman, minat baca siswa meningkat.\" adalah ...",
+          "choices": {
+            "A": "Semua siswa sudah suka membaca",
+            "B": "Kenyamanan perpustakaan memengaruhi kebiasaan siswa",
+            "C": "Perpustakaan tidak perlu ditingkatkan",
+            "D": "Minat baca tidak bisa berubah",
+            "E": "Sekolah harus membatasi buku"
+          },
+          "answer": "B",
+          "explanation": "Asumsi: faktor lingkungan (kenyamanan) berpengaruh pada minat baca.",
+          "tags": [
+            "asumsi"
+          ]
+        },
+        {
+          "qid": "LITID-01-009",
+          "type": "multiple_choice",
+          "stem": "Kalimat yang paling tepat sebagai sanggahan untuk klaim: \"Belajar daring pasti menurunkan kualitas\" adalah ...",
+          "choices": {
+            "A": "Kualitas selalu turun pada semua keadaan",
+            "B": "Daring membuat semua siswa malas",
+            "C": "Kualitas dipengaruhi desain pembelajaran dan dukungan, bukan semata mode daring/luring",
+            "D": "Belajar luring tidak perlu",
+            "E": "Teknologi selalu buruk"
+          },
+          "answer": "C",
+          "explanation": "Sanggahan yang kuat menyerang generalisasi 'pasti' dan menawarkan variabel penentu.",
+          "tags": [
+            "argumen",
+            "sanggahan"
+          ]
+        },
+        {
+          "qid": "LITID-01-010",
+          "type": "multiple_choice",
+          "stem": "Teks: \"Kampanye kesehatan efektif ketika pesan sederhana, konsisten, dan relevan.\" Kalimat tersebut terutama menekankan ...",
+          "choices": {
+            "A": "Kampanye harus panjang",
+            "B": "Efektivitas ditentukan oleh kualitas pesan",
+            "C": "Kesehatan hanya urusan individu",
+            "D": "Relevansi tidak penting",
+            "E": "Konsistensi membuat pesan membosankan"
+          },
+          "answer": "B",
+          "explanation": "Tiga kriteria (sederhana, konsisten, relevan) adalah aspek kualitas pesan.",
+          "tags": [
+            "inti_gagasan"
+          ]
+        }
+      ]
+    },
+    {
+      "pack_id": "LITEN-PACK-01",
+      "subtest": "Literasi Bahasa Inggris",
+      "title": "English Literacy Pack 01 - Critical Reading",
+      "time_limit_minutes": 30,
+      "questions": [
+        {
+          "qid": "LITEN-01-001",
+          "type": "multiple_choice",
+          "stem": "Text: \"Online reviews can guide buyers, but they can also be manipulated. A careful reader compares multiple sources before deciding.\" The author’s recommendation is to ...",
+          "choices": {
+            "A": "trust the first review you read",
+            "B": "ignore all reviews",
+            "C": "compare information from several sources",
+            "D": "buy only the cheapest product",
+            "E": "write reviews instead of reading them"
+          },
+          "answer": "C",
+          "explanation": "The text explicitly suggests comparing multiple sources.",
+          "tags": [
+            "author_purpose",
+            "recommendation"
+          ]
+        },
+        {
+          "qid": "LITEN-01-002",
+          "type": "multiple_choice",
+          "stem": "Text: \"The city planted thousands of trees. As a result, summer temperatures in some neighborhoods dropped slightly.\" The relationship is ...",
+          "choices": {
+            "A": "contrast",
+            "B": "cause-effect",
+            "C": "example",
+            "D": "definition",
+            "E": "sequence only"
+          },
+          "answer": "B",
+          "explanation": "\"As a result\" signals cause-effect.",
+          "tags": [
+            "logic_relation"
+          ]
+        },
+        {
+          "qid": "LITEN-01-003",
+          "type": "multiple_choice",
+          "stem": "Text: \"While automation may replace certain tasks, it also creates new roles requiring different skills.\" The tone is best described as ...",
+          "choices": {
+            "A": "purely pessimistic",
+            "B": "purely optimistic",
+            "C": "balanced",
+            "D": "angry",
+            "E": "sarcastic"
+          },
+          "answer": "C",
+          "explanation": "It acknowledges both negative and positive aspects.",
+          "tags": [
+            "tone"
+          ]
+        },
+        {
+          "qid": "LITEN-01-004",
+          "type": "multiple_choice",
+          "stem": "Text: \"The study reported improvements, but the sample size was small.\" The limitation is ...",
+          "choices": {
+            "A": "the results are impossible",
+            "B": "a small sample may reduce reliability/generalizability",
+            "C": "the author dislikes studies",
+            "D": "the topic is unimportant",
+            "E": "the sample size is always irrelevant"
+          },
+          "answer": "B",
+          "explanation": "Small sample size weakens confidence in broad conclusions.",
+          "tags": [
+            "critical_reading",
+            "limitation"
+          ]
+        },
+        {
+          "qid": "LITEN-01-005",
+          "type": "multiple_choice",
+          "stem": "Which statement is an inference (not directly stated)? Text: \"Maria practiced daily for weeks and finally performed confidently on stage.\"",
+          "choices": {
+            "A": "Maria performed on stage",
+            "B": "Maria practiced daily",
+            "C": "Maria’s practice contributed to her confidence",
+            "D": "Maria performed confidently",
+            "E": "Maria practiced for weeks"
+          },
+          "answer": "C",
+          "explanation": "Cause (practice) → effect (confidence) is inferred from the sequence.",
+          "tags": [
+            "inference"
+          ]
+        },
+        {
+          "qid": "LITEN-01-006",
+          "type": "multiple_choice",
+          "stem": "Text: \"Some argue that public transport is inconvenient. However, when routes are frequent and integrated, many commuters prefer it.\" The author mainly argues that ...",
+          "choices": {
+            "A": "public transport is always inconvenient",
+            "B": "people prefer cars in every situation",
+            "C": "good system design can make public transport attractive",
+            "D": "routes should be reduced",
+            "E": "commuters dislike integration"
+          },
+          "answer": "C",
+          "explanation": "The author counters inconvenience by highlighting conditions that improve preference.",
+          "tags": [
+            "argument"
+          ]
+        },
+        {
+          "qid": "LITEN-01-007",
+          "type": "multiple_choice",
+          "stem": "Text: \"The article criticizes 'quick fixes' and calls for long-term planning.\" The phrase \"quick fixes\" most likely refers to ...",
+          "choices": {
+            "A": "solutions that address root causes",
+            "B": "temporary solutions without lasting impact",
+            "C": "research-based policies",
+            "D": "careful evaluation",
+            "E": "community participation"
+          },
+          "answer": "B",
+          "explanation": "Quick fixes are short-term measures not solving deeper problems.",
+          "tags": [
+            "vocabulary_in_context"
+          ]
+        },
+        {
+          "qid": "LITEN-01-008",
+          "type": "multiple_choice",
+          "stem": "Text: \"Compared to 2010, energy consumption fell by 15% in 2020.\" This sentence primarily provides ...",
+          "choices": {
+            "A": "an opinion",
+            "B": "a definition",
+            "C": "a comparison using data",
+            "D": "a command",
+            "E": "a question"
+          },
+          "answer": "C",
+          "explanation": "It compares two years and includes a percentage figure.",
+          "tags": [
+            "data_interpretation"
+          ]
+        },
+        {
+          "qid": "LITEN-01-009",
+          "type": "multiple_choice",
+          "stem": "Which title best fits the text: \"Regular sleep improves memory consolidation and concentration.\"",
+          "choices": {
+            "A": "Why People Forget Everything",
+            "B": "The Benefits of Regular Sleep for Learning",
+            "C": "How to Stay Awake All Night",
+            "D": "Memory Has Nothing to Do with Sleep",
+            "E": "Concentration Is Always Genetic"
+          },
+          "answer": "B",
+          "explanation": "Title should match main idea: sleep benefits learning/memory/concentration.",
+          "tags": [
+            "title",
+            "main_idea"
+          ]
+        },
+        {
+          "qid": "LITEN-01-010",
+          "type": "multiple_choice",
+          "stem": "Text: \"The writer acknowledges opposing views before presenting evidence.\" This strategy is used to ...",
+          "choices": {
+            "A": "avoid giving any argument",
+            "B": "make the text confusing",
+            "C": "increase credibility and strengthen persuasion",
+            "D": "hide the evidence",
+            "E": "change the topic"
+          },
+          "answer": "C",
+          "explanation": "Addressing counterarguments and then giving evidence strengthens persuasion.",
+          "tags": [
+            "rhetorical_strategy"
+          ]
+        }
+      ]
+    },
+    {
+      "pack_id": "PM-PACK-01",
+      "subtest": "Penalaran Matematika (PM)",
+      "title": "PM Pack 01 - Aritmetika, Rasio, Fungsi, Data",
+      "time_limit_minutes": 20,
+      "questions": [
+        {
+          "qid": "PM-01-001",
+          "type": "multiple_choice",
+          "stem": "Harga sebuah jaket Rp240.000 didiskon 15%. Harga setelah diskon adalah ...",
+          "choices": {
+            "A": "Rp204.000",
+            "B": "Rp206.000",
+            "C": "Rp210.000",
+            "D": "Rp215.000",
+            "E": "Rp216.000"
+          },
+          "answer": "A",
+          "explanation": "Diskon 15% = 0,15×240.000 = 36.000. Harga akhir = 240.000 − 36.000 = 204.000.",
+          "tags": [
+            "persentase"
+          ]
+        },
+        {
+          "qid": "PM-01-002",
+          "type": "multiple_choice",
+          "stem": "Perbandingan usia A : B = 3 : 5. Jika jumlah usia mereka 32 tahun, usia B adalah ...",
+          "choices": {
+            "A": "12",
+            "B": "15",
+            "C": "18",
+            "D": "20",
+            "E": "25"
+          },
+          "answer": "D",
+          "explanation": "Total bagian = 8. Nilai 1 bagian = 32/8 = 4. Usia B = 5×4 = 20.",
+          "tags": [
+            "rasio"
+          ]
+        },
+        {
+          "qid": "PM-01-003",
+          "type": "multiple_choice",
+          "stem": "Jika f(x) = 2x − 3, maka f(5) = ...",
+          "choices": {
+            "A": "5",
+            "B": "6",
+            "C": "7",
+            "D": "8",
+            "E": "9"
+          },
+          "answer": "C",
+          "explanation": "f(5)=10−3=7.",
+          "tags": [
+            "fungsi"
+          ]
+        },
+        {
+          "qid": "PM-01-004",
+          "type": "multiple_choice",
+          "stem": "Rata-rata dari 6, 8, 10, 12 adalah ...",
+          "choices": {
+            "A": "8",
+            "B": "9",
+            "C": "10",
+            "D": "11",
+            "E": "12"
+          },
+          "answer": "B",
+          "explanation": "Rata-rata = (6+8+10+12)/4 = 36/4 = 9.",
+          "tags": [
+            "rata_rata"
+          ]
+        },
+        {
+          "qid": "PM-01-005",
+          "type": "multiple_choice",
+          "stem": "Sebuah mobil menempuh 150 km dalam 3 jam. Kecepatan rata-ratanya adalah ...",
+          "choices": {
+            "A": "40",
+            "B": "45",
+            "C": "50",
+            "D": "55",
+            "E": "60"
+          },
+          "answer": "C",
+          "explanation": "v = s/t = 150/3 = 50 km/jam.",
+          "tags": [
+            "kecepatan"
+          ]
+        },
+        {
+          "qid": "PM-01-006",
+          "type": "multiple_choice",
+          "stem": "Jika 3/4 dari suatu bilangan adalah 48, maka bilangan tersebut adalah ...",
+          "choices": {
+            "A": "36",
+            "B": "48",
+            "C": "60",
+            "D": "64",
+            "E": "72"
+          },
+          "answer": "D",
+          "explanation": "x×3/4=48 → x=48×4/3=64.",
+          "tags": [
+            "pecahan"
+          ]
+        },
+        {
+          "qid": "PM-01-007",
+          "type": "multiple_choice",
+          "stem": "Tabel nilai: Andi 80, Budi 70, Cici 90, Deni 60, Evi 100. Median dari data tersebut adalah ...",
+          "choices": {
+            "A": "70",
+            "B": "80",
+            "C": "85",
+            "D": "90",
+            "E": "100"
+          },
+          "answer": "B",
+          "explanation": "Urut: 60,70,80,90,100. Median = 80.",
+          "tags": [
+            "median",
+            "data"
+          ]
+        },
+        {
+          "qid": "PM-01-008",
+          "type": "multiple_choice",
+          "stem": "Sebuah toko menjual 120 unit barang. 35% di antaranya adalah tipe A. Jumlah tipe A adalah ...",
+          "choices": {
+            "A": "40",
+            "B": "42",
+            "C": "45",
+            "D": "48",
+            "E": "50"
+          },
+          "answer": "B",
+          "explanation": "0,35×120 = 42.",
+          "tags": [
+            "persentase"
+          ]
+        },
+        {
+          "qid": "PM-01-009",
+          "type": "multiple_choice",
+          "stem": "Jika 2x + 5 = 19, maka x = ...",
+          "choices": {
+            "A": "5",
+            "B": "6",
+            "C": "7",
+            "D": "8",
+            "E": "9"
+          },
+          "answer": "C",
+          "explanation": "2x + 5 = 19 → 2x = 14 → x = 7.",
+          "tags": [
+            "aljabar"
+          ]
+        },
+        {
+          "qid": "PM-01-010",
+          "type": "multiple_choice",
+          "stem": "Sebuah pekerjaan selesai dalam 10 hari oleh 6 orang. Jika dikerjakan 12 orang dengan produktivitas sama, waktu yang diperlukan adalah ...",
+          "choices": {
+            "A": "3",
+            "B": "4",
+            "C": "5",
+            "D": "6",
+            "E": "8"
+          },
+          "answer": "C",
+          "explanation": "Total beban kerja = 6×10 = 60 orang-hari. Waktu = 60/12 = 5 hari.",
+          "tags": [
+            "kerja_waktu"
+          ]
+        }
+      ]
+    }
+  ]
+}

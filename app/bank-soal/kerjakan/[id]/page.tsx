@@ -31,7 +31,6 @@ export default async function BankSoalDetailPage(props: PageProps) {
   const supabase = await createClient();
 
   // 1. Ambil Data Paket Soal & Relasi Soal
-  // PERBAIKAN: Komentar dihapus dari dalam string select()
   const { data: tryout, error } = await supabase
     .from("tryouts")
     .select(`
@@ -101,7 +100,7 @@ export default async function BankSoalDetailPage(props: PageProps) {
         <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 p-4 text-center">
             <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm max-w-md">
                 <h3 className="text-lg font-bold text-slate-800 mb-2">Paket Soal Kosong</h3>
-                <p className="text-slate-500 mb-6">Paket "{tryout.title}" belum memiliki butir soal aktif.</p>
+                <p className="text-slate-500 mb-6">Paket &quot;{tryout.title}&quot; belum memiliki butir soal aktif.</p>
                 <Link href="/bank-soal" className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-black transition">
                     <ArrowLeft size={18}/> Kembali
                 </Link>
@@ -129,10 +128,12 @@ export default async function BankSoalDetailPage(props: PageProps) {
             </Link>
         </div>
 
+        {/* PERBAIKAN: Menambahkan props tryoutId={id} */}
         <BankSoalClient 
           questions={finalQuestions} 
           title={tryout.title}
           categorySlug={tryout.category || "latihan-soal"}
+          tryoutId={id} 
         />
       </div>
     </div>

@@ -4,10 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { 
   ChevronRight, CheckCircle, XCircle, 
-  Trophy, RotateCcw, Home, BookOpen, 
+  Trophy, Home, BookOpen, 
   Type, Minus, Plus 
 } from "lucide-react";
 import clsx from "clsx";
+import { submitQuizResult } from '@/app/actions/submit-quiz'; 
+import { useRouter } from 'next/navigation';
 
 // --- TIPE DATA ---
 type Option = {
@@ -23,23 +25,32 @@ type Question = {
   explanation: string;
 };
 
+// PERBAIKAN: Menambahkan tryoutId ke interface
+interface BankSoalClientProps {
+  questions: Question[];
+  title: string;
+  categorySlug: string;
+  tryoutId: string;
+}
+
 export default function BankSoalClient({
   questions,
   title,
   categorySlug,
-}: {
-  questions: Question[];
-  title: string;
-  categorySlug: string;
-}) {
+  tryoutId, 
+}: BankSoalClientProps) {
+  
   // --- STATE ---
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [isChecked, setIsChecked] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   
-  // STATE BARU: Ukuran Font (default: 'base')
+  const router = useRouter();
+  
+  // STATE: Ukuran Font (default: 'base')
   const [fontSize, setFontSize] = useState<'sm' | 'base' | 'lg'>('base');
 
   // --- DATA TURUNAN ---
@@ -78,6 +89,42 @@ export default function BankSoalClient({
     return Math.round((correct / totalQuestions) * 100);
   };
 
+  // PERBAIKAN: Fungsi Simpan ke Database
+  const handleFinishAndSave = async () => {
+    setIsSaving(true);
+
+    try {
+      // 1. Hitung ulang statistik
+      const correctCount = questions.reduce((acc, q) => {
+        return acc + (userAnswers[q.id] === q.correct_answer ? 1 : 0);
+      }, 0);
+      
+      const wrongCount = totalQuestions - correctCount;
+      const score = Math.round((correctCount / totalQuestions) * 100);
+
+      // 2. Panggil Server Action
+      const result = await submitQuizResult({
+        tryout_id: tryoutId,
+        score: score,
+        total_correct: correctCount,
+        total_wrong: wrongCount
+      });
+
+      if (result.error) {
+        alert(result.error);
+        setIsSaving(false);
+      } else {
+        alert('Nilai berhasil disimpan!');
+        // Redirect ke halaman kategori setelah simpan
+        router.push(`/bank-soal/${categorySlug}`);
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Terjadi kesalahan saat menyimpan.');
+      setIsSaving(false);
+    }
+  };
+
   // Helper untuk kelas Font Size dinamis
   const getTextSizeClass = () => {
     switch (fontSize) {
@@ -87,7 +134,7 @@ export default function BankSoalClient({
     }
   };
 
-  // --- TAMPILAN 1: HASIL SKOR (Tidak berubah banyak) ---
+  // --- TAMPILAN 1: HASIL SKOR ---
   if (showResult) {
     const score = calculateScore();
     const correctCount = questions.filter(q => userAnswers[q.id] === q.correct_answer).length;
@@ -115,25 +162,28 @@ export default function BankSoalClient({
           </div>
         </div>
 
-        <div className="flex gap-3 justify-center">
-          <button 
-            onClick={() => window.location.reload()} 
-            className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 text-sm transition"
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          {/* TOMBOL SIMPAN HASIL */}
+          <button
+            onClick={handleFinishAndSave}
+            disabled={isSaving}
+            className="flex items-center justify-center gap-2 px-6 py-2.5 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
           >
-            <RotateCcw size={16} /> Ulangi
+            {isSaving ? 'Menyimpan...' : 'Simpan & Keluar'}
           </button>
+          
           <Link 
             href={`/bank-soal/${categorySlug}`}
-            className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-bold bg-slate-900 text-white hover:bg-black text-sm transition"
+            className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-bold bg-white border-2 border-slate-200 text-slate-600 hover:bg-slate-50 text-sm transition"
           >
-            <Home size={16} /> Selesai
+             <Home size={16} /> Tanpa Simpan
           </Link>
         </div>
       </div>
     );
   }
 
-  // --- TAMPILAN 2: MODE PENGERJAAN (Compact + Font Control) ---
+  // --- TAMPILAN 2: MODE PENGERJAAN ---
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden flex flex-col h-[85vh] md:h-[600px] w-full max-w-5xl mx-auto relative">
       
@@ -169,7 +219,7 @@ export default function BankSoalClient({
          </div>
       </div>
 
-      {/* PROGRESS BAR (Tipis) */}
+      {/* PROGRESS BAR */}
       <div className="flex-none w-full bg-slate-100 h-1">
         <div 
           className="bg-indigo-600 h-full transition-all duration-500 ease-out"
@@ -187,7 +237,6 @@ export default function BankSoalClient({
         {/* Pilihan Jawaban */}
         <div className="space-y-2.5">
           {currentQuestion.options.map((opt) => {
-            // Logic Style (Sama seperti sebelumnya)
             let style = "border-slate-200 hover:border-indigo-300 hover:bg-slate-50 cursor-pointer";
             let badgeStyle = "bg-slate-100 text-slate-500 group-hover:bg-indigo-100 group-hover:text-indigo-600";
             

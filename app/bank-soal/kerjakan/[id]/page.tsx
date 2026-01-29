@@ -18,6 +18,7 @@ type Question = {
   options: Option[];
   correct_answer: string;
   explanation: string;
+  image_url?: string | null; // Tambahkan ini
 };
 
 interface PageProps {
@@ -31,6 +32,7 @@ export default async function BankSoalDetailPage(props: PageProps) {
   const supabase = await createClient();
 
   // 1. Ambil Data Paket Soal & Relasi Soal
+  // UPDATE: Menambahkan 'image_url' di select query
   const { data: tryout, error } = await supabase
     .from("tryouts")
     .select(`
@@ -44,7 +46,8 @@ export default async function BankSoalDetailPage(props: PageProps) {
           content,
           options,
           correct_answer,
-          explanation
+          explanation,
+          image_url
         )
       )
     `)
@@ -128,7 +131,6 @@ export default async function BankSoalDetailPage(props: PageProps) {
             </Link>
         </div>
 
-        {/* PERBAIKAN: Menambahkan props tryoutId={id} */}
         <BankSoalClient 
           questions={finalQuestions} 
           title={tryout.title}

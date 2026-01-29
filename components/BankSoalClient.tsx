@@ -1,5 +1,6 @@
 "use client";
 
+import QuestionRenderer from "@/components/QuestionRenderer";
 import { useState } from "react";
 import Link from "next/link";
 import { 
@@ -23,9 +24,9 @@ type Question = {
   options: Option[];
   correct_answer: string;
   explanation: string;
+  image_url?: string | null; // UPDATE: Tambah field ini
 };
 
-// PERBAIKAN: Menambahkan tryoutId ke interface
 interface BankSoalClientProps {
   questions: Question[];
   title: string;
@@ -89,12 +90,10 @@ export default function BankSoalClient({
     return Math.round((correct / totalQuestions) * 100);
   };
 
-  // PERBAIKAN: Fungsi Simpan ke Database
   const handleFinishAndSave = async () => {
     setIsSaving(true);
 
     try {
-      // 1. Hitung ulang statistik
       const correctCount = questions.reduce((acc, q) => {
         return acc + (userAnswers[q.id] === q.correct_answer ? 1 : 0);
       }, 0);
@@ -102,7 +101,6 @@ export default function BankSoalClient({
       const wrongCount = totalQuestions - correctCount;
       const score = Math.round((correctCount / totalQuestions) * 100);
 
-      // 2. Panggil Server Action
       const result = await submitQuizResult({
         tryout_id: tryoutId,
         score: score,
@@ -115,7 +113,6 @@ export default function BankSoalClient({
         setIsSaving(false);
       } else {
         alert('Nilai berhasil disimpan!');
-        // Redirect ke halaman kategori setelah simpan
         router.push(`/bank-soal/${categorySlug}`);
       }
     } catch (error) {
@@ -163,7 +160,6 @@ export default function BankSoalClient({
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          {/* TOMBOL SIMPAN HASIL */}
           <button
             onClick={handleFinishAndSave}
             disabled={isSaving}
@@ -187,7 +183,7 @@ export default function BankSoalClient({
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden flex flex-col h-[85vh] md:h-[600px] w-full max-w-5xl mx-auto relative">
       
-      {/* HEADER: Judul & Kontrol Font */}
+      {/* HEADER */}
       <div className="flex-none p-4 border-b border-slate-100 bg-slate-50/80 backdrop-blur-sm flex justify-between items-center z-10">
          <div className="flex flex-col">
             <h2 className="text-sm font-bold text-slate-800 line-clamp-1">{title}</h2>
@@ -196,7 +192,6 @@ export default function BankSoalClient({
             </span>
          </div>
 
-         {/* KONTROL FONT */}
          <div className="flex items-center bg-white rounded-lg border border-slate-200 p-1 shadow-sm">
             <button 
               onClick={() => setFontSize('sm')}
@@ -229,9 +224,14 @@ export default function BankSoalClient({
 
       {/* BODY: Scrollable Area */}
       <div className="flex-1 overflow-y-auto p-5 md:p-8 scroll-smooth">
-        {/* Teks Soal */}
-        <div className={`prose prose-slate max-w-none mb-6 text-slate-800 leading-relaxed ${getTextSizeClass()}`}>
-           <p className="whitespace-pre-line">{currentQuestion.content}</p>
+        
+        {/* --- UPDATE: MENGGUNAKAN RENDERER BARU --- */}
+        <div className="mb-6">
+           <QuestionRenderer 
+             content={currentQuestion.content} 
+             imageUrl={currentQuestion.image_url}
+             className={getTextSizeClass()} // Pass ukuran font ke renderer
+           />
         </div>
 
         {/* Pilihan Jawaban */}
@@ -265,9 +265,11 @@ export default function BankSoalClient({
                 <span className={`w-7 h-7 flex items-center justify-center rounded-lg text-xs font-bold transition-colors flex-shrink-0 mt-0.5 ${badgeStyle}`}>
                   {opt.code}
                 </span>
-                <span className={`font-medium text-slate-700 leading-snug ${getTextSizeClass()}`}>
-                  {opt.text}
-                </span>
+                
+                {/* Render Opsi Jawaban (Support LaTeX juga jika perlu) */}
+                <div className={`flex-1 font-medium text-slate-700 leading-snug ${getTextSizeClass()}`}>
+                   <QuestionRenderer content={opt.text} className="m-0 p-0" />
+                </div>
                 
                 {isChecked && opt.code === currentQuestion.correct_answer && (
                   <CheckCircle className="absolute right-3 top-3 text-emerald-600" size={18} />
@@ -287,15 +289,18 @@ export default function BankSoalClient({
                 <div className="flex items-center gap-2 mb-2 text-blue-800 font-bold text-sm border-b border-blue-200 pb-2">
                   <BookOpen size={16} /> Pembahasan
                 </div>
-                <div className={`text-slate-700 leading-relaxed whitespace-pre-line ${getTextSizeClass()}`}>
-                  {currentQuestion.explanation || "Pembahasan tidak tersedia."}
-                </div>
+                
+                {/* --- UPDATE: MENGGUNAKAN RENDERER BARU UNTUK PEMBAHASAN --- */}
+                <QuestionRenderer 
+                   content={currentQuestion.explanation || "Pembahasan tidak tersedia."}
+                   className={`text-slate-700 leading-relaxed ${getTextSizeClass()}`}
+                />
              </div>
           </div>
         )}
       </div>
 
-      {/* FOOTER: Fixed at Bottom */}
+      {/* FOOTER */}
       <div className="flex-none p-4 border-t border-slate-100 bg-white z-20 flex justify-between items-center gap-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
         
         {!isChecked ? (

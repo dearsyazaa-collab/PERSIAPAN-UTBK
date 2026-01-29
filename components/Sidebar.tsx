@@ -1,6 +1,7 @@
 'use client'
 
 import Link from "next/link"
+import Image from "next/image" // Import Image
 import { usePathname } from "next/navigation"
 import { 
   LayoutDashboard, BookOpen, PenTool, Library, 
@@ -34,9 +35,16 @@ export default function Sidebar({ isExpanded }: { isExpanded: boolean }) {
       
       {/* HEADER LOGO */}
       <div className={`h-24 flex items-center px-6 transition-all duration-500 ${isExpanded ? "justify-start gap-4" : "justify-center"}`}>
-        {/* Logo Icon */}
-        <div className="h-10 w-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-900/40 ring-1 ring-white/10">
-            <span className="font-bold text-xl text-white">U</span>
+        
+        {/* LOGO IMAGE (GARUDA) */}
+        <div className="relative h-10 w-10 flex-shrink-0">
+           <Image 
+             src="/garuda.png" 
+             alt="Logo Garuda" 
+             fill 
+             className="object-contain"
+             priority
+           />
         </div>
         
         {/* Logo Text (Animated) */}
@@ -83,7 +91,7 @@ export default function Sidebar({ isExpanded }: { isExpanded: boolean }) {
                 {item.name}
               </span>
 
-              {/* Active Indicator Dot (Optional - muncul pas collapsed biar user tau lagi di menu mana) */}
+              {/* Active Indicator Dot */}
               {!isExpanded && isActive && (
                 <div className="absolute right-2 w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)]" />
               )}

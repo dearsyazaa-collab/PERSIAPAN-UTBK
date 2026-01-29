@@ -1,32 +1,65 @@
-// src/app/dashboard/page.tsx
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
-import { User, ClipboardList, BookOpen, Target, ArrowRight, Sparkles } from "lucide-react";
+import { 
+  User, ClipboardList, BookOpen, Target, 
+  ArrowRight, Sparkles, History, TrendingUp, Calendar 
+} from "lucide-react";
 import TargetUniversityClient from "@/components/TargetUniversityClient";
+import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
 
-  // Ambil user auth
+  // 1. Ambil user auth
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Ambil profile dari public.users
-  let profile: { username?: string; full_name?: string; role?: string; target_university?: string } | null = null;
-  if (user) {
-    const { data } = await supabase
-      .from("users")
-      .select("username, full_name, role, target_university")
-      .eq("id", user.id)
-      .maybeSingle();
-    profile = data || null;
+  if (!user) {
+    redirect("/login");
   }
 
+  // 2. Ambil profile user
+  let profile: { username?: string; full_name?: string; role?: string; target_university?: string } | null = null;
+  
+  const { data: userData } = await supabase
+    .from("users")
+    .select("username, full_name, role, target_university")
+    .eq("id", user.id)
+    .maybeSingle();
+  profile = userData || null;
+
+  // 3. AMBIL DATA HASIL KUIS (New Feature)
+  const { data: results } = await supabase
+    .from("quiz_results")
+    .select(`
+      id,
+      score,
+      total_correct,
+      total_wrong,
+      created_at,
+      tryouts (
+        title,
+        category
+      )
+    `)
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false });
+
+  const quizHistory = results || [];
+
+  // 4. HITUNG STATISTIK (New Feature)
+  const totalLatihan = quizHistory.length;
+  // Hitung rata-rata skor
+  const averageScore = totalLatihan > 0
+    ? Math.round(quizHistory.reduce((acc, curr) => acc + curr.score, 0) / totalLatihan)
+    : 0;
+
+  // Helpers
   const displayName =
     profile?.full_name?.trim() ||
     profile?.username ||
-    (user ? user.email?.split("@")[0] : "Siswa");
+    user.email?.split("@")[0] || "Siswa";
 
   const today = new Date().toLocaleDateString("id-ID", {
     weekday: "long",
@@ -35,20 +68,26 @@ export default async function DashboardPage() {
     year: "numeric",
   });
 
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "short",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+  };
+
   return (
-    // CONTAINER UTAMA: Relative & Overflow-hidden penting untuk background blobs
+    // CONTAINER UTAMA
     <div className="min-h-screen bg-slate-50 relative overflow-hidden font-sans text-slate-900">
       
-      {/* --- BACKGROUND DECORATION (Elegan & Samar) --- */}
-      {/* Blob Biru di Kanan Atas */}
+      {/* --- BACKGROUND DECORATION --- */}
       <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-blue-200/40 rounded-full blur-3xl -z-10 animate-pulse"></div>
-      {/* Blob Ungu di Kiri Tengah */}
       <div className="absolute top-[20%] left-[-10%] w-[400px] h-[400px] bg-indigo-200/40 rounded-full blur-3xl -z-10"></div>
       
-      {/* Centered page container (z-10 agar di atas background) */}
       <div className="mx-auto max-w-7xl px-6 py-10 relative z-10">
         
-        {/* Header Personal dengan Glassmorphism */}
+        {/* HEADER PERSONAL */}
         <div className="rounded-2xl bg-white/80 backdrop-blur-md border border-white/60 p-8 shadow-sm mb-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-5">
@@ -78,33 +117,36 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        {/* Grid layout: main (2/3) + right widget (1/3) */}
+        {/* GRID LAYOUT */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {/* Main area */}
+          {/* Main area (Kiri) */}
           <section className="lg:col-span-2 space-y-8">
             
-            {/* Quick Stats Cards (Glassmorphism) */}
+            {/* STATS CARDS (Updated with Real Data) */}
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+              {/* Card 1: Total Soal/Latihan */}
               <div className="rounded-2xl border border-white/60 bg-white/70 backdrop-blur-sm p-5 shadow-sm hover:shadow-md transition-all">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-blue-100 text-blue-600 rounded-lg">
                     <ClipboardList className="h-5 w-5" />
                   </div>
-                  <p className="text-sm font-medium text-slate-500">Soal Dikerjakan</p>
+                  <p className="text-sm font-medium text-slate-500">Latihan Selesai</p>
                 </div>
-                <p className="text-3xl font-bold text-slate-800 ml-1">0</p>
+                <p className="text-3xl font-bold text-slate-800 ml-1">{totalLatihan}</p>
               </div>
 
+              {/* Card 2: Rata-rata Nilai (Diganti dari Tryout Diikuti) */}
               <div className="rounded-2xl border border-white/60 bg-white/70 backdrop-blur-sm p-5 shadow-sm hover:shadow-md transition-all">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-indigo-100 text-indigo-600 rounded-lg">
-                    <BookOpen className="h-5 w-5" />
+                    <TrendingUp className="h-5 w-5" />
                   </div>
-                  <p className="text-sm font-medium text-slate-500">Tryout Diikuti</p>
+                  <p className="text-sm font-medium text-slate-500">Rata-rata Skor</p>
                 </div>
-                <p className="text-3xl font-bold text-slate-800 ml-1">0</p>
+                <p className="text-3xl font-bold text-slate-800 ml-1">{averageScore}</p>
               </div>
 
+              {/* Card 3: Target */}
               <div className="rounded-2xl border border-white/60 bg-white/70 backdrop-blur-sm p-5 shadow-sm hover:shadow-md transition-all">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg">
@@ -118,7 +160,7 @@ export default async function DashboardPage() {
               </div>
             </div>
 
-            {/* Action Hub */}
+            {/* ACTION HUB (Tetap sama) */}
             <div className="rounded-3xl border border-white/60 bg-white/80 backdrop-blur-md p-8 shadow-sm relative overflow-hidden">
               <div className="relative z-10">
                 <h2 className="text-xl font-bold text-slate-900 mb-2">Mulai Belajar</h2>
@@ -127,10 +169,7 @@ export default async function DashboardPage() {
                 </p>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                  <Link
-                    href="/bank-soal"
-                    className="group flex flex-col justify-between gap-4 rounded-2xl border border-blue-100 bg-blue-50/50 p-5 hover:bg-blue-100 hover:border-blue-200 transition-all cursor-pointer"
-                  >
+                  <Link href="/bank-soal" className="group flex flex-col justify-between gap-4 rounded-2xl border border-blue-100 bg-blue-50/50 p-5 hover:bg-blue-100 hover:border-blue-200 transition-all cursor-pointer">
                     <div className="h-10 w-10 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-200 group-hover:scale-110 transition-transform">
                         <BookOpen size={20} />
                     </div>
@@ -140,10 +179,7 @@ export default async function DashboardPage() {
                     </div>
                   </Link>
 
-                  <Link
-                    href="/tryout"
-                    className="group flex flex-col justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-md transition-all cursor-pointer"
-                  >
+                  <Link href="/tryout" className="group flex flex-col justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-md transition-all cursor-pointer">
                     <div className="h-10 w-10 bg-slate-100 text-slate-600 rounded-xl flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                         <Target size={20} />
                     </div>
@@ -153,10 +189,7 @@ export default async function DashboardPage() {
                     </div>
                   </Link>
 
-                  <Link
-                    href="/materi"
-                    className="group flex flex-col justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-md transition-all cursor-pointer"
-                  >
+                  <Link href="/materi" className="group flex flex-col justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:border-indigo-300 hover:shadow-md transition-all cursor-pointer">
                      <div className="h-10 w-10 bg-slate-100 text-slate-600 rounded-xl flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                         <ClipboardList size={20} />
                     </div>
@@ -167,23 +200,64 @@ export default async function DashboardPage() {
                   </Link>
                 </div>
               </div>
-               {/* Hiasan Background Card */}
                <div className="absolute top-0 right-0 w-64 h-full bg-gradient-to-l from-white to-transparent opacity-80 -z-0 pointer-events-none"></div>
             </div>
 
-            {/* Announcement Area */}
-            <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50/50 p-6 text-sm text-slate-600">
-              <div className="flex items-center gap-2 mb-2">
-                 <span className="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded text-xs font-bold border border-yellow-200">INFO</span>
-                 <strong className="text-slate-800">Pengumuman Terbaru</strong>
+            {/* --- RIWAYAT PENGERJAAN (BARU) --- */}
+            <div className="rounded-2xl border border-white/60 bg-white/70 backdrop-blur-sm shadow-sm overflow-hidden">
+              <div className="p-6 border-b border-slate-100 flex items-center gap-2">
+                <History className="text-indigo-600" size={20} />
+                <h3 className="font-bold text-slate-800">Riwayat Pengerjaan</h3>
               </div>
-              <p>Belum ada pengumuman saat ini. Tetap semangat belajar! 🚀</p>
+
+              {quizHistory.length === 0 ? (
+                <div className="p-8 text-center text-slate-500 text-sm">
+                  Belum ada data latihan. Yuk mulai kerjakan soal!
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-sm">
+                    <thead className="bg-slate-50/50 text-slate-500 font-medium">
+                      <tr>
+                        <th className="px-6 py-3">Paket Soal</th>
+                        <th className="px-6 py-3">Waktu</th>
+                        <th className="px-6 py-3 text-center">Skor</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {quizHistory.map((item) => (
+                        <tr key={item.id} className="hover:bg-slate-50 transition">
+                          <td className="px-6 py-4">
+                            {/* @ts-ignore */}
+                            <div className="font-bold text-slate-800">{item.tryouts?.title || "Paket Dihapus"}</div>
+                            {/* @ts-ignore */}
+                            <div className="text-xs text-slate-500 capitalize">{item.tryouts?.category?.replace(/-/g, ' ')}</div>
+                          </td>
+                          <td className="px-6 py-4 text-slate-500 whitespace-nowrap">
+                            <div className="flex items-center gap-2">
+                                <Calendar size={14}/> {formatDate(item.created_at)}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            <span className={`inline-block px-3 py-1 rounded-lg font-bold text-xs ${
+                              item.score >= 70 ? 'bg-emerald-100 text-emerald-700' : 
+                              item.score >= 50 ? 'bg-yellow-100 text-yellow-700' : 
+                              'bg-rose-100 text-rose-700'
+                            }`}>
+                              {item.score}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </section>
 
-          {/* Right widget column */}
+          {/* Right widget column (Kanan) */}
           <aside className="space-y-6">
-            {/* Target Universitas widget */}
             <div className="rounded-2xl border border-white/60 bg-white/70 backdrop-blur-sm p-6 shadow-sm w-full">
               <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
                 <Target size={18} className="text-emerald-500"/>
@@ -196,7 +270,6 @@ export default async function DashboardPage() {
               </div>
             </div>
 
-            {/* Helper Card */}
             <div className="rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50 to-white p-6 text-sm text-slate-600 shadow-sm w-full">
               <h4 className="font-bold text-indigo-900 mb-2">Butuh Bantuan?</h4>
               <p className="mb-3 text-xs leading-relaxed">

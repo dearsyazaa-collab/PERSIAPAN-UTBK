@@ -3,7 +3,7 @@ name: Deploy Next.js ke Hosting
 on:
   push:
     branches:
-      - main   # Pastikan branch utama Anda namanya 'main'. Kalau 'master', ganti jadi 'master'
+      - main
 
 jobs:
   web-deploy:
@@ -19,7 +19,9 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        # Kita exclude file yang tidak perlu di-upload
+        protocol: ftps             # WAJIB: Gunakan FTPS (Secure)
+        port: 21                   # Port standar cPanel
+        security: loose            # "loose" menerima sertifikat SSL hosting (menghindari error self-signed)
         exclude: |
           **/.git*
           **/.git*/**

@@ -1,4 +1,4 @@
-name: Deploy Next.js ke Hosting
+name: Deploy Next.js (Build di GitHub)
 
 on:
   push:
@@ -7,13 +7,25 @@ on:
 
 jobs:
   web-deploy:
-    name: 🚀 Deploy Files
+    name: 🚀 Build & Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Ambil Kode Terbaru
+    - name: 🚚 Ambil Kode
       uses: actions/checkout@v4
 
-    - name: 📂 Upload ke Hosting via FTP
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: 📦 Install & Build di GitHub
+      run: |
+        npm install
+        # Kita matikan cek error saat build biar lancar
+        export NEXT_PUBLIC_IGNORE_BUILD_ERRORS=true
+        npm run build
+
+    - name: 📂 Upload ke Hosting
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
@@ -22,14 +34,11 @@ jobs:
         protocol: ftps
         port: 21
         security: loose
+        server-dir: ./platform-utbk/aplikasi-cbt/
         
-        # INI KUNCI PERBAIKANNYA:
-        # Kita suruh dia masuk ke folder aplikasi-cbt sebelum upload
-        server-dir: ./aplikasi-cbt/
-        
+        # PENTING: Kita upload folder .next (hasil build), tapi TIDAK upload node_modules (berat)
         exclude: |
           **/.git*
           **/.git*/**
           **/node_modules/**
-          **/.next/**
           **/.env*

@@ -19,9 +19,14 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        protocol: ftps             # WAJIB: Gunakan FTPS (Secure)
-        port: 21                   # Port standar cPanel
-        security: loose            # "loose" menerima sertifikat SSL hosting (menghindari error self-signed)
+        protocol: ftps
+        port: 21
+        security: loose
+        
+        # INI KUNCI PERBAIKANNYA:
+        # Kita suruh dia masuk ke folder aplikasi-cbt sebelum upload
+        server-dir: ./aplikasi-cbt/
+        
         exclude: |
           **/.git*
           **/.git*/**

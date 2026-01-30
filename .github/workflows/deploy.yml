@@ -1,4 +1,4 @@
-name: Deploy Next.js (Build di GitHub)
+name: Deploy Next.js (Metode ZIP)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   web-deploy:
-    name: 🚀 Build & Deploy
+    name: 🚀 Build, Zip, & Deploy
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Ambil Kode
@@ -18,14 +18,21 @@ jobs:
       with:
         node-version: '20'
 
-    - name: 📦 Install & Build di GitHub
+    - name: 📦 Build & Bungkus (Zip)
       run: |
         npm install
-        # Kita matikan cek error saat build biar lancar
+        # Matikan cek error agar build lancar
         export NEXT_PUBLIC_IGNORE_BUILD_ERRORS=true
         npm run build
-
-    - name: 📂 Upload ke Hosting
+        
+        # Buat folder sementara untuk menampung file siap kirim
+        mkdir siap_kirim
+        
+        # Masukkan file penting ke dalam ZIP
+        # Kita pakai wildcard next.config.* jaga-jaga kalau namanya .js/.mjs/.ts
+        zip -r siap_kirim/paket_website.zip .next public package.json next.config.*
+        
+    - name: 📂 Upload ZIP ke Hosting
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
@@ -34,11 +41,7 @@ jobs:
         protocol: ftps
         port: 21
         security: loose
-        server-dir: ./platform-utbk/aplikasi-cbt/
         
-        # PENTING: Kita upload folder .next (hasil build), tapi TIDAK upload node_modules (berat)
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          **/.env*
+        # Upload ISI dari folder siap_kirim (yaitu file zip saja)
+        local-dir: ./siap_kirim/
+        server-dir: ./platform-utbk/aplikasi-cbt/
